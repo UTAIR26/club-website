@@ -1,12 +1,11 @@
 import { motion } from "motion/react";
-import { ArrowRight, Cpu, Zap, Globe, Users } from "lucide-react";
+import { ArrowRight, Cpu, Globe, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const stats = [
   { label: "Active Projects", value: "12+", icon: Cpu },
-  { label: "Team Members", value: "80+", icon: Users },
-  { label: "Competitions", value: "5", icon: Globe },
-  { label: "Awards Won", value: "15", icon: Zap },
+  { label: "Team Members", value: "30+", icon: Users },
+  { label: "Future competition planned", value: "1", icon: Globe },
 ];
 
 const featuredProjects = [
@@ -57,7 +56,7 @@ export default function Home() {
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 tracking-tighter">
                 University of Toronto <br />
-                <span className="text-primary text-glow">Aerospace & Robotics</span>
+                <span className="text-primary text-glow">Aerospace & Robotics Club</span>
               </h1>
               <p className="text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
                 We are a multidisciplinary team of students dedicated to pushing the boundaries of aerospace engineering and robotics through hands-on innovation.
@@ -106,7 +105,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 bg-dark-lighter border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
