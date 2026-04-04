@@ -1,11 +1,24 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import About from "./pages/About";
-import ExecTeam from "./pages/ExecTeam";
+
+const Home = lazy(() => import("./pages/Home"));
+const Projects = lazy(() => import("./pages/Projects"));
+const About = lazy(() => import("./pages/About"));
+const ExecTeam = lazy(() => import("./pages/ExecTeam"));
+
+function RouteFallback() {
+  return (
+    <div
+      className="min-h-[50vh] flex items-center justify-center text-gray-500 text-sm"
+      aria-busy="true"
+    >
+      Loading…
+    </div>
+  );
+}
 
 export default function App() {
   const location = useLocation();
@@ -22,12 +35,14 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Routes location={location}>
-              <Route path="/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/team" element={<ExecTeam />} />
-            </Routes>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/team" element={<ExecTeam />} />
+              </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

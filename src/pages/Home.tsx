@@ -9,6 +9,27 @@ const stats = [
   { label: "Awards Won", value: "15", icon: Zap },
 ];
 
+const featuredProjects = [
+  {
+    title: "Drone Swarm",
+    desc: "Autonomous coordination system for multi-agent aerial vehicles.",
+    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
+    color: "primary",
+  },
+  {
+    title: "Rover Titan",
+    desc: "Next-gen planetary exploration vehicle with advanced suspension.",
+    img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=800&auto=format&fit=crop",
+    color: "secondary",
+  },
+  {
+    title: "STASIS System",
+    desc: "Stabilization and tracking system for high-altitude payloads.",
+    img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
+    color: "tertiary",
+  },
+] as const;
+
 export default function Home() {
   return (
     <motion.div
@@ -66,10 +87,12 @@ export default function Home() {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden border border-primary/20 glow-blue">
                 <img
-                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop"
                   alt="Robotic Arm"
                   className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               {/* Decorative elements */}
@@ -118,26 +141,7 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Drone Swarm",
-                desc: "Autonomous coordination system for multi-agent aerial vehicles.",
-                img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop",
-                color: "primary"
-              },
-              {
-                title: "Rover Titan",
-                desc: "Next-gen planetary exploration vehicle with advanced suspension.",
-                img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1954&auto=format&fit=crop",
-                color: "secondary"
-              },
-              {
-                title: "STASIS System",
-                desc: "Stabilization and tracking system for high-altitude payloads.",
-                img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072&auto=format&fit=crop",
-                color: "tertiary"
-              }
-            ].map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ y: 30, opacity: 0 }}
@@ -152,6 +156,8 @@ export default function Home() {
                     alt={project.title}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-8">
