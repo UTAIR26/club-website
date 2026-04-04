@@ -64,10 +64,12 @@ export default function About() {
           <div className="relative">
             <div className="rounded-2xl overflow-hidden border border-primary/20 glow-blue">
               <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop"
                 alt="Team working"
                 className="w-full h-auto grayscale"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-primary p-8 rounded-2xl hidden md:block">
@@ -122,8 +124,9 @@ export default function About() {
               viewport={{ once: true }}
               className={`relative mb-16 md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:text-right md:ml-[-50%]" : "md:pl-12 md:ml-[50%]"}`}
             >
-              <div className="absolute top-0 w-4 h-4 bg-primary rounded-full -left-[9px] md:left-auto md:right-[-9px] border-4 border-dark"></div>
-              <div className={`absolute top-0 w-4 h-4 bg-primary rounded-full -left-[9px] border-4 border-dark ${i % 2 === 0 ? "md:right-[-9px]" : "md:left-[-9px]"}`}></div>
+              <div
+                className={`absolute top-0 w-4 h-4 bg-primary rounded-full -left-[9px] border-4 border-dark ${i % 2 === 0 ? "md:right-[-9px] md:left-auto" : "md:left-[-9px]"}`}
+              />
               
               <div className="bg-dark-lighter p-6 rounded-2xl border border-primary/10">
                 <span className="text-primary font-display font-bold text-xl mb-2 block">{item.year}</span>

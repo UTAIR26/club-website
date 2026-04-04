@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
-import { Search, Filter, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { Search, ArrowUpRight } from "lucide-react";
+import { useMemo, useState } from "react";
 
 const categories = ["All", "Robotics", "Aerospace", "Software", "Hardware"];
 
@@ -59,12 +59,18 @@ export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProjects = projects.filter(p => {
-    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
-    const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          p.desc.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProjects = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return projects.filter((p) => {
+      const matchesCategory =
+        activeCategory === "All" || p.category === activeCategory;
+      const matchesSearch =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q);
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
     <motion.div
@@ -129,6 +135,8 @@ export default function Projects() {
                   alt={project.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute top-4 right-4 px-3 py-1 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase tracking-widest">
                   {project.category}

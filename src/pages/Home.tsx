@@ -1,13 +1,33 @@
 import { motion } from "motion/react";
-import { ArrowRight, Cpu, Zap, Globe, Users } from "lucide-react";
+import { ArrowRight, Cpu, Globe, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const stats = [
   { label: "Active Projects", value: "12+", icon: Cpu },
-  { label: "Team Members", value: "80+", icon: Users },
-  { label: "Competitions", value: "5", icon: Globe },
-  { label: "Awards Won", value: "15", icon: Zap },
+  { label: "Team Members", value: "30+", icon: Users },
+  { label: "Future competition planned", value: "1", icon: Globe },
 ];
+
+const featuredProjects = [
+  {
+    title: "Drone Swarm",
+    desc: "Autonomous coordination system for multi-agent aerial vehicles.",
+    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
+    color: "primary",
+  },
+  {
+    title: "Rover Titan",
+    desc: "Next-gen planetary exploration vehicle with advanced suspension.",
+    img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=800&auto=format&fit=crop",
+    color: "secondary",
+  },
+  {
+    title: "STASIS System",
+    desc: "Stabilization and tracking system for high-altitude payloads.",
+    img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
+    color: "tertiary",
+  },
+] as const;
 
 export default function Home() {
   return (
@@ -36,7 +56,7 @@ export default function Home() {
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 tracking-tighter">
                 University of Toronto <br />
-                <span className="text-primary text-glow">Aerospace & Robotics</span>
+                <span className="text-primary text-glow">Aerospace & Robotics Club</span>
               </h1>
               <p className="text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
                 We are a multidisciplinary team of students dedicated to pushing the boundaries of aerospace engineering and robotics through hands-on innovation.
@@ -66,10 +86,12 @@ export default function Home() {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden border border-primary/20 glow-blue">
                 <img
-                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop"
                   alt="Robotic Arm"
                   className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               {/* Decorative elements */}
@@ -83,7 +105,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 bg-dark-lighter border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -118,26 +140,7 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Drone Swarm",
-                desc: "Autonomous coordination system for multi-agent aerial vehicles.",
-                img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop",
-                color: "primary"
-              },
-              {
-                title: "Rover Titan",
-                desc: "Next-gen planetary exploration vehicle with advanced suspension.",
-                img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1954&auto=format&fit=crop",
-                color: "secondary"
-              },
-              {
-                title: "STASIS System",
-                desc: "Stabilization and tracking system for high-altitude payloads.",
-                img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072&auto=format&fit=crop",
-                color: "tertiary"
-              }
-            ].map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ y: 30, opacity: 0 }}
@@ -152,6 +155,8 @@ export default function Home() {
                     alt={project.title}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-8">
