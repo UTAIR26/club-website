@@ -3,28 +3,29 @@ import { ArrowRight, Cpu, Globe, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const stats = [
-  { label: "Active Projects", value: "12+", icon: Cpu },
+  { label: "Build in progress", value: "1", icon: Cpu },
+  { label: "Projects planned next", value: "2", icon: Globe },
   { label: "Team Members", value: "30+", icon: Users },
-  { label: "Future competition planned", value: "1", icon: Globe },
 ];
 
 const featuredProjects = [
   {
-    title: "Drone Swarm",
-    desc: "Autonomous coordination system for multi-agent aerial vehicles.",
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
+    title: "Marvin",
+    desc: "Our first robot—Arduino Uno, ultrasonic sensing, servo scan, and L298N-driven 2WD obstacle avoidance.",
+    img: "/marvin-circuit.png",
     color: "primary",
+    imageContain: true,
   },
   {
-    title: "Rover Titan",
-    desc: "Next-gen planetary exploration vehicle with advanced suspension.",
-    img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=800&auto=format&fit=crop",
+    title: "Club build II",
+    desc: "Second hands-on project on the roadmap—details to be announced.",
+    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
     color: "secondary",
   },
   {
-    title: "STASIS System",
-    desc: "Stabilization and tracking system for high-altitude payloads.",
-    img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
+    title: "Club build III",
+    desc: "Third build planned after Marvin and build II—stay tuned.",
+    img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop",
     color: "tertiary",
   },
 ] as const;
@@ -132,7 +133,7 @@ export default function Home() {
           <div className="flex justify-between items-end mb-16">
             <div>
               <h2 className="text-4xl font-display font-bold mb-4 tracking-tight">Featured Projects</h2>
-              <p className="text-gray-400 max-w-md">Our latest breakthroughs in autonomous systems and aerospace design.</p>
+              <p className="text-gray-400 max-w-md">What we are building now and what is lined up next.</p>
             </div>
             <Link to="/projects" className="text-primary font-bold hover:underline flex items-center gap-2">
               View All <ArrowRight className="w-4 h-4" />
@@ -149,11 +150,15 @@ export default function Home() {
                 transition={{ delay: index * 0.2 }}
                 className="group relative bg-dark-lighter rounded-2xl overflow-hidden border border-primary/10 hover:border-primary/30 transition-all"
               >
-                <div className="aspect-video overflow-hidden">
+                <div className={`aspect-video overflow-hidden ${"imageContain" in project && project.imageContain ? "bg-dark" : ""}`}>
                   <img
                     src={project.img}
                     alt={project.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                    className={`w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 ${
+                      "imageContain" in project && project.imageContain
+                        ? "object-contain object-center p-4 h-full group-hover:scale-[1.02]"
+                        : "object-cover group-hover:scale-110"
+                    }`}
                     referrerPolicy="no-referrer"
                     loading="lazy"
                     decoding="async"
@@ -162,9 +167,9 @@ export default function Home() {
                 <div className="p-8">
                   <h3 className="text-xl font-display font-bold mb-2">{project.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed mb-6">{project.desc}</p>
-                  <div className="flex items-center gap-2 text-primary font-bold text-sm">
-                    Read Case Study <ArrowRight className="w-4 h-4" />
-                  </div>
+                  <Link to="/projects" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+                    View projects <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </motion.div>
             ))}

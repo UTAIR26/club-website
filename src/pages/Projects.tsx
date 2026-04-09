@@ -7,51 +7,31 @@ const categories = ["All", "Robotics", "Aerospace", "Software", "Hardware"];
 const projects = [
   {
     id: 1,
-    title: "Drone Swarm",
-    category: "Aerospace",
-    desc: "Autonomous coordination system for multi-agent aerial vehicles using decentralized control algorithms.",
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070&auto=format&fit=crop",
-    tags: ["ROS", "Python", "PX4"]
+    title: "Marvin",
+    phase: "In build" as const,
+    category: "Robotics",
+    desc: "Our first club robot: a 2WD obstacle-avoiding rover on an Arduino Uno, with an HC-SR04 ultrasonic sensor on a servo, two DC motors via an L298N H-bridge, and separate motor vs logic power as in the reference build.",
+    img: "/marvin-circuit.png",
+    imageContain: true,
+    tags: ["Arduino Uno", "HC-SR04", "L298N", "Servo"]
   },
   {
     id: 2,
-    title: "Rover Titan",
+    title: "Club build II",
+    phase: "Planned" as const,
     category: "Robotics",
-    desc: "Next-gen planetary exploration vehicle with advanced rocker-bogie suspension and autonomous navigation.",
-    img: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1954&auto=format&fit=crop",
-    tags: ["SolidWorks", "C++", "Lidar"]
+    desc: "Second hands-on project—scope and timeline will be announced as the team finalizes goals and hardware.",
+    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop",
+    tags: ["TBA"]
   },
   {
     id: 3,
-    title: "STASIS System",
-    category: "Hardware",
-    desc: "Stabilization and tracking system for high-altitude payloads, ensuring steady data collection in extreme conditions.",
-    img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072&auto=format&fit=crop",
-    tags: ["Embedded", "PCB Design", "Control"]
-  },
-  {
-    id: 4,
-    title: "Neural Navigator",
-    category: "Software",
-    desc: "Deep learning based path planning for robots in dynamic environments with real-time obstacle avoidance.",
-    img: "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=2070&auto=format&fit=crop",
-    tags: ["PyTorch", "OpenCV", "AI"]
-  },
-  {
-    id: 5,
-    title: "Vortex Engine",
-    category: "Aerospace",
-    desc: "Experimental propulsion system focusing on high efficiency and low emission for sub-orbital flight.",
-    img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=2070&auto=format&fit=crop",
-    tags: ["Fluid Dynamics", "Thermodynamics"]
-  },
-  {
-    id: 6,
-    title: "Exo-Frame V2",
+    title: "Club build III",
+    phase: "Planned" as const,
     category: "Robotics",
-    desc: "Wearable robotic exoskeleton designed to assist in heavy lifting and rehabilitation applications.",
-    img: "https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=80&w=2012&auto=format&fit=crop",
-    tags: ["Biomechanics", "Actuators"]
+    desc: "Third project in our roadmap—details to follow after the first two builds are underway.",
+    img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
+    tags: ["TBA"]
   }
 ];
 
@@ -67,7 +47,8 @@ export default function Projects() {
       const matchesSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q);
+        p.desc.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q));
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -84,7 +65,7 @@ export default function Projects() {
         <div className="mb-16">
           <h1 className="text-5xl font-display font-bold mb-6 tracking-tighter">Our Projects</h1>
           <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-            From autonomous rovers to high-altitude rockets, explore the technical challenges we're tackling.
+            One robot in active development today, two more builds on the roadmap—follow along as we grow.
           </p>
         </div>
 
@@ -129,15 +110,22 @@ export default function Projects() {
               transition={{ delay: index * 0.05 }}
               className="group bg-dark-lighter rounded-2xl overflow-hidden border border-primary/10 hover:border-primary/30 transition-all flex flex-col"
             >
-              <div className="aspect-video overflow-hidden relative">
+              <div className="aspect-video overflow-hidden relative bg-dark">
                 <img
                   src={project.img}
                   alt={project.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className={`w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 ${
+                    "imageContain" in project && project.imageContain
+                      ? "object-contain object-center p-4 group-hover:scale-[1.02]"
+                      : "object-cover group-hover:scale-105"
+                  }`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
                 />
+                <div className="absolute top-4 left-4 px-3 py-1 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-bold text-gray-200 border border-primary/20 uppercase tracking-widest">
+                  {"phase" in project ? project.phase : ""}
+                </div>
                 <div className="absolute top-4 right-4 px-3 py-1 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase tracking-widest">
                   {project.category}
                 </div>
