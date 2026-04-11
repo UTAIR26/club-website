@@ -17,21 +17,21 @@ const projects = [
   },
   {
     id: 2,
-    title: "Club build II",
+    title: "Mini obstacle-avoidance drone",
     phase: "Planned" as const,
-    category: "Robotics",
-    desc: "Second hands-on project—scope and timeline will be announced as the team finalizes goals and hardware.",
-    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop",
-    tags: ["TBA"]
+    category: "Aerospace",
+    desc: "A small multirotor build focused on sensing its surroundings and maneuvering clear of obstacles—hardware, flight stack, and autonomy details to be nailed down as we finish Marvin.",
+    img: "https://images.unsplash.com/photo-1473968510367-eeac244d6fb7?q=80&w=2070&auto=format&fit=crop",
+    tags: ["UAV", "Obstacle avoidance", "Planning"]
   },
   {
     id: 3,
-    title: "Club build III",
+    title: "Rocket simulation",
     phase: "Planned" as const,
-    category: "Robotics",
-    desc: "Third project in our roadmap—details to follow after the first two builds are underway.",
-    img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
-    tags: ["TBA"]
+    category: "Aerospace",
+    desc: "A software-first project simulating rocket dynamics and flight so we can explore trajectories, staging, and performance without a physical launch vehicle—tooling and scope TBA.",
+    img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=2070&auto=format&fit=crop",
+    tags: ["Simulation", "Rocket", "Planning"]
   }
 ];
 

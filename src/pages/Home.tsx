@@ -17,15 +17,15 @@ const featuredProjects = [
     imageContain: true,
   },
   {
-    title: "Club build II",
-    desc: "Second hands-on project on the roadmap—details to be announced.",
-    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
+    title: "Mini obstacle-avoidance drone",
+    desc: "A compact UAV that detects obstacles and flies clear—planned after our ground robot.",
+    img: "https://images.unsplash.com/photo-1473968510367-eeac244d6fb7?q=80&w=800&auto=format&fit=crop",
     color: "secondary",
   },
   {
-    title: "Club build III",
-    desc: "Third build planned after Marvin and build II—stay tuned.",
-    img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop",
+    title: "Rocket simulation",
+    desc: "Simulated rocket flight to study trajectories and performance before any real hardware.",
+    img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=800&auto=format&fit=crop",
     color: "tertiary",
   },
 ] as const;
